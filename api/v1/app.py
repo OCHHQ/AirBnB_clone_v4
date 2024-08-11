@@ -11,8 +11,8 @@ from flasgger.utils import swag_from
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
-
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+# CORS(app, resources={"/api/*": {"origins": "192.168.100.186"}})
 
 @app.teardown_appcontext
 def close_db(error):
@@ -32,7 +32,7 @@ def not_found(error):
 
 app.config['SWAGGER'] = {
     'title': 'AirBnB clone Restful API',
-    'uiversion': 3
+    'uiversion': 4
 }
 
 Swagger(app)
